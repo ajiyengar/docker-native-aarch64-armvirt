@@ -16,7 +16,9 @@
 # This image is intended for jobs that compile the source code and as a general
 # purpose image. It contains the toolchains for all supported architectures, and
 # all build dependencies.
-FROM registry.fedoraproject.org/fedora:40 AS build
+
+# https://registry.fedoraproject.org/repo/fedora/tags/
+FROM registry.fedoraproject.org/fedora:40-aarch64 AS build
 
 # Preinstall python + dependencies as virtual environment
 RUN dnf \
@@ -61,7 +63,6 @@ RUN dnf \
         make \
         nuget \
         nasm \
-        https://github.com/PowerShell/PowerShell/releases/download/v${POWERSHELL_VERSION}/powershell-${POWERSHELL_VERSION}-1.rh.x86_64.rpm \
         python3 \
         python3-distutils-extra \
         python3-pip \
@@ -121,9 +122,9 @@ RUN dnf \
         nano
 
 # Setup the git credential manager for developer credentials.
-RUN curl -L "${GCM_LINK}" | tar -xz -C /usr/local/bin
-RUN git-credential-manager-core configure
-RUN git config --global credential.credentialStore cache
+#RUN curl -L "${GCM_LINK}" | tar -xz -C /usr/local/bin
+#RUN git-credential-manager-core configure
+#RUN git config --global credential.credentialStore cache
 RUN cp /etc/skel/.bashrc /root/.bashrc
 
 # Set the entry point

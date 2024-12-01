@@ -1,6 +1,8 @@
 *.raw
 *.log
 .cache
+.edkCode
+.vscode
 compile_commands.json
 cscope.files
 module_report.json

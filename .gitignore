@@ -1,2 +1,6 @@
 *.raw
 *.log
+.cache
+compile_commands.json
+cscope.files
+module_report.json
